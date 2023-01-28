@@ -87,7 +87,11 @@ body {
   overflow-x: hidden;
   background-color: white;
 }
-
+.mainLayout{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 a,h1 {
   color: black;
   text-decoration: none;
@@ -137,7 +141,7 @@ main{
   width: 100%;
   max-width: 1450px;
   margin: auto;
-  min-height: 500px;
+  min-height: 100%;
 }
 
 .home_body{
@@ -182,6 +186,7 @@ main{
   justify-content: center;
   align-content: center;
   align-items: center;
+  height: 100%;
 }
 .card{
   position: relative;
@@ -245,7 +250,9 @@ main{
   outline: none;
   border: none;
   width: 200px;
+  margin: auto;
   border-bottom: 1px solid #333;
+  color: #1e1e1e;
   align-self: flex-start;
 }
 .submitBtn{
@@ -264,4 +271,18 @@ main{
 }
 .submitBtn:active{
   scale: 1.1;
+}
+
+label{
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
 }
