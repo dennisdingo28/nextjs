@@ -6,11 +6,18 @@ const EventDetails = (props) => {
   const { id, title, city, description, image } = props;
   const inputEmail=useRef();
   const router=useRouter();
+  const [message,setMessage]=useState('');
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const emailValue=inputEmail.current.value;
     const eventId=router?.query.id;
+
+    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if(!emailValue.match(validRegex)){
+      setMessage('Please introduce a correct email address')
+    }
 
     try{
       const response = await fetch("/api/emailRegistration",{
@@ -23,7 +30,8 @@ const EventDetails = (props) => {
       );
       if(!response.ok) throw new Error(`Error: ${response.status}`)
       const data = await response.json();
-      console.log('POST',data);
+      setMessage(data.message);
+      inputEmail.current.value='';
     }catch(e){
       console.log('ERROR',e);
     }
@@ -38,14 +46,15 @@ const EventDetails = (props) => {
           <label>Get Registered for the event!</label>
           <input
             placeholder="Please insert your email here"
-            type="email"
+            type="text"
             className="newsletterInput"
             ref={inputEmail}
           />
-          <button className="submitBtn" type="submit" onClick={onSubmit}>
+          <button className="submitBtn" type="submit">
             Submit
           </button>
         </form>
+        <p>{message}</p>
       </div>
     </div>
   );
